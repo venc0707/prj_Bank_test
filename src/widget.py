@@ -1,20 +1,21 @@
-from masks import get_mask_card_number, get_mask_check
 import re
 
+from .masks import get_mask_card_number, get_mask_check
 
-def mask_account_card(type_number: str) -> list:
-    """ Функция возвращает: тип карты и номер(счет) карты """
+
+def mask_account_card(type_number: str) -> str:
+    """Функция возвращает: тип карты и номер(счет) карты"""
     split_type_number = type_number.split()
     type_card = []
-    ac_number = ''
-    mask_card = ''
+    ac_number = ""
+    mask_card = ""
     for item in split_type_number:
         if re.fullmatch(r"^[a-zA-Z]+$", item):
             type_card.append(item)
-            type_card_join = ' '.join(type_card)
+            type_card_join = " ".join(type_card)
         elif re.fullmatch(r"^[а-яёА-ЯЁ]+$", item):
             type_card.append(item)
-            type_card_join = ' '.join(type_card)
+            type_card_join = " ".join(type_card)
         if item.isdigit():
             ac_number += item
     if len(ac_number) == 20:
@@ -22,21 +23,21 @@ def mask_account_card(type_number: str) -> list:
     elif len(ac_number) == 16:
         mask_card = get_mask_card_number(ac_number)
 
-    return f'{type_card_join} {mask_card}'
+    return str(f"{type_card_join} {mask_card}")
 
 
 def get_date(data: str) -> str:
-    """ Функция возвращает дату в формате 'ДД.ММ.ГГГГ' """
-    data_split = data.split('T')
-    year_mounth_day = data_split[0].split('-')
+    """Функция возвращает дату в формате 'ДД.ММ.ГГГГ'"""
+    data_split = data.split("T")
+    year_mounth_day = data_split[0].split("-")
 
     return f'"{year_mounth_day[-1]}.{year_mounth_day[1]}.{year_mounth_day[0]}"'
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     #  type_number = 'Maestro 1596837868705199'
     # type_number = 'Visa Platinum 8990922113665229'
-    type_number = 'Счет 35383033474447895560'
+    type_number = "Счет 35383033474447895560"
     print(mask_account_card(type_number))  # Visa Platinum 7000 79** **** 6361 | Счет **4305
 
     data = "2024-03-11T02:26:18.671407"
