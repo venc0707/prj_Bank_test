@@ -25,9 +25,19 @@ def mask_account_card(type_number: str) -> list:
     return f'{type_card_join} {mask_card}'
 
 
+def get_date(data: str) -> str:
+    """ Функция возвращает дату в формате 'ДД.ММ.ГГГГ' """
+    data_split = data.split('T')
+    year_mounth_day = data_split[0].split('-')
+
+    return f'"{year_mounth_day[-1]}.{year_mounth_day[1]}.{year_mounth_day[0]}"'
+
 
 if __name__ == '__main__':
     #  type_number = 'Maestro 1596837868705199'
-    #type_number = 'Visa Platinum 8990922113665229'
+    # type_number = 'Visa Platinum 8990922113665229'
     type_number = 'Счет 35383033474447895560'
     print(mask_account_card(type_number))  # Visa Platinum 7000 79** **** 6361 | Счет **4305
+
+    data = "2024-03-11T02:26:18.671407"
+    print(get_date(data))  # "11.03.2024"
