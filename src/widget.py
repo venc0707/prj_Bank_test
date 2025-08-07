@@ -1,6 +1,6 @@
 import re
 
-from .masks import get_mask_card_number, get_mask_check
+from masks import get_mask_card_number, get_mask_check
 
 
 def mask_account_card(type_number: str) -> str:
@@ -31,7 +31,7 @@ def get_date(data: str) -> str:
     data_split = data.split("T")
     year_mounth_day = data_split[0].split("-")
 
-    return f'"{year_mounth_day[-1]}.{year_mounth_day[1]}.{year_mounth_day[0]}"'
+    return f'{year_mounth_day[-1]}.{year_mounth_day[1]}.{year_mounth_day[0]}'
 
 
 if __name__ == "__main__":
