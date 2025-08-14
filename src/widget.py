@@ -52,5 +52,5 @@ if __name__ == "__main__":
     type_number = "Счет 35383033474447895560"
     print(mask_account_card(type_number))  # Visa Platinum 7000 79** **** 6361 | Счет **4305
 
-    date = "T02:26:18.671407"
+    date = "2024-03-11T02:26:18.671407"
     print(get_date(date))  # "11.03.2024"
