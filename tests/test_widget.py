@@ -27,6 +27,7 @@ def test_get_data():
 @pytest.mark.parametrize('date, expected_date', [('2024-03-1102:26:18.671407', ValueError),
                                                  ('', ValueError),
                                                  (2024 - 10 - 11, TypeError),
+                                                 ('T02:26:18.671407', ValueError)
                                                  ])
 def test_test_get_data_raise(date, expected_date):
     with pytest.raises(expected_date) as exc_info:
