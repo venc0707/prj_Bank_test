@@ -6,7 +6,7 @@ from src.masks import get_mask_card_number, get_mask_check
 def mask_account_card(type_number: str) -> str:
     """Функция возвращает: тип карты и номер(счет) карты"""
     if not isinstance(type_number, str):
-        raise TypeError('Неверный тип даных')
+        raise TypeError("Неверный тип даных")
 
     split_type_number = type_number.split()
     type_card = []
@@ -26,7 +26,7 @@ def mask_account_card(type_number: str) -> str:
     elif len(ac_number) == 16:
         mask_card = get_mask_card_number(ac_number)
     else:
-        raise ValueError('Неверный ввод')
+        raise ValueError("Неверный ввод")
 
     return str(f"{type_card_join} {mask_card}")
 
@@ -35,15 +35,15 @@ def get_date(date: str) -> str:
     """Функция возвращает дату в формате 'ДД.ММ.ГГГГ'"""
     if not isinstance(date, str):
         raise TypeError
-    if not 'T' in date:
+    if "T" not in date:
         raise ValueError
 
     date_split = date.split("T")
-    if date_split[0] == '':
-        raise ValueError('Неверный ввод')
+    if date_split[0] == "":
+        raise ValueError("Неверный ввод")
     year_mounth_day = date_split[0].split("-")
 
-    return f'{year_mounth_day[-1]}.{year_mounth_day[1]}.{year_mounth_day[0]}'
+    return f"{year_mounth_day[-1]}.{year_mounth_day[1]}.{year_mounth_day[0]}"
 
 
 if __name__ == "__main__":
