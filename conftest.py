@@ -1,40 +1,10 @@
-from types import new_class
-
-from pygments.styles.dracula import yellow
+import pytest
 
 
-def filter_by_currency(transactions: list[dict], currency_name: str) -> dict:
-    """возвращает итератор с транзакциями по названию валюты"""
-    currency_name = currency_name.upper()
-    transactions = (transaction for transaction in transactions if transaction['operationAmount']['currency']['code'] == currency_name )
-
-    for transaction in transactions:
-        yield transaction
-
-
-def transaction_descriptions(transactions: list[dict]) -> str:
-    """возвращает описание каждой операции """
-    descriptions = (transaction['description'] for transaction in transactions)
-    for description in descriptions:
-        yield description
-
-
-def card_number_generator(start: int, end: int) -> str:
-    """выдает номера банковских карт в формате
-    XXXX XXXX XXXX XXXX"""
-    numbers = range(start, end+1)
-    mask_card = '0000000000000000'
-    if start >= 1 and end <= 9999999999999999:
-        for num in numbers:
-            new_card = mask_card[:len(mask_card)-len(str(num))]
-            new_card += str(num)
-
-            yield (f'{new_card[:4]} {new_card[4:8]} {new_card[8:12]} {new_card[12:16]}')
-    else:
-        raise ValueError('неверный диапазон')
-
-if __name__ == "__main__":
-    transactions =    [
+@pytest.fixture
+def transactions():
+    transactions = (
+        [
             {
                 "id": 939719570,
                 "state": "EXECUTED",
@@ -111,20 +81,5 @@ if __name__ == "__main__":
                 "to": "Счет 14211924144426031657"
             }
         ]
-
-    usd_transactions = filter_by_currency(transactions, "usd")
-    try:
-        for _ in range(3):
-            print(next(usd_transactions))
-    except StopIteration:
-        print(f"Не найдено транзакций в указанной валюте")
-
-    descriptions = transaction_descriptions(transactions)
-    try:
-        for _ in range(5):
-            print(next(descriptions))
-    except StopIteration:
-        print(f"Не найдено транзакций в указанной валюте")
-
-    for card_number in card_number_generator(1, 5):
-        print(card_number)
+    )
+    return transactions
