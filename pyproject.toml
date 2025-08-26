@@ -35,4 +35,8 @@ line_length = 119
 [tool.mypy]
 disallow_untyped_defs = true
 warn_return_any = true
-exclude = 'venv .venv tests'
+exclude = ['venv',
+    '.venv',
+    '.tests/',
+    'tests/'
+]
