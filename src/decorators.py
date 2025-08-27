@@ -1,21 +1,25 @@
-#from functools import wraps
+from functools import wraps
 from typing import Callable
 
 
 def log(filename=None):
     def wapper(func: Callable):
-        #@wraps
+        @wraps(func)
         def iter(*args, **kwargs):
 
             try:
                 result = func(*args, **kwargs)
                 if filename:
-                    with open(filename, 'w', encoding='utf-8') as file:
-                        file.write(f'{func.__name__}: completed')
+                    with open(filename, 'a', encoding='utf-8') as file:
+                        file.write(f'{func.__name__}: completed\n')
+                else:
+                    print(f'{func.__name__}: completed')
             except Exception as exc_info:
                 if filename:
-                    with open(filename, 'w', encoding='utf-8') as file:
-                        file.write(f'{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}')
+                    with open(filename, 'a', encoding='utf-8') as file:
+                        file.write(f'{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}\n')
+                else:
+                    print(f'{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}')
                 raise
             return result
 
