@@ -1,27 +1,27 @@
 from functools import wraps
-from typing import Callable
-from os.path import dirname, join
+from typing import Callable, Optional, Any
 
 
-def log(filename=None):
+def log(filename: Optional[str] = None) -> Callable:
     """логирование функций"""
-    def wapper(func: Callable):
+
+    def wapper(func: Callable) -> Callable:
         @wraps(func)
-        def iter(*args, **kwargs):
+        def iter(*args: Any, **kwargs: Any) -> Any:
 
             try:
                 result = func(*args, **kwargs)
                 if filename:
-                    with open(filename, 'a', encoding='utf-8') as file:
-                        file.write(f'{func.__name__}: completed\n')
+                    with open(filename, "a", encoding="utf-8") as file:
+                        file.write(f"{func.__name__}: completed\n")
                 else:
-                    print(f'{func.__name__}: completed')
+                    print(f"{func.__name__}: completed")
             except Exception as exc_info:
                 if filename:
-                    with open(filename, 'a', encoding='utf-8') as file:
-                        file.write(f'{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}\n')
+                    with open(filename, "a", encoding="utf-8") as file:
+                        file.write(f"{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}\n")
                 else:
-                    print(f'{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}')
+                    print(f"{func.__name__}: {str(exc_info)}. Inputs: {args}, {kwargs}")
                 raise
             return result
 
