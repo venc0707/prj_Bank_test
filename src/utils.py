@@ -1,7 +1,6 @@
 import json
 from os.path import dirname, join
 import os
-import requests
 
 
 def financial_transaction(filename: str) -> list[dict]:
@@ -33,11 +32,5 @@ def financial_transaction(filename: str) -> list[dict]:
         return []
 
 
-
-
-
-
-
 if __name__ == "__main__":
-
     print(financial_transaction('operations.json'))
