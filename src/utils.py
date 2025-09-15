@@ -9,10 +9,6 @@ def financial_transaction(filename: str) -> list[dict]:
     dir = dirname(dirname(__file__))
     path_filename = join(dir, f'data/{filename}')
 
-    if os.path.getsize(path_filename) == 0:
-        print('Файл пуст')
-        return []
-
     try:
         with open(path_filename, 'r', encoding='utf-8') as file:
             try:
