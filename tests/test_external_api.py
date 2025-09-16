@@ -1,23 +1,15 @@
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
+
 import requests
+
 from src.external_api import amount_transaction
 
 
-@patch('requests.get')
-@patch('src.external_api.financial_transaction')
+@patch("requests.get")
+@patch("src.external_api.financial_transaction")
 def test_external_api(mock_financial, mock_get):
     # Мок для financial_transaction
-    mock_financial.return_value = [
-        {
-            "id": 41428829,
-            "operationAmount": {
-                "amount": 100.0,
-                "currency": {
-                    "code": "USD"
-                }
-            }
-        }
-    ]
+    mock_financial.return_value = [{"id": 41428829, "operationAmount": {"amount": 100.0, "currency": {"code": "USD"}}}]
 
     # Мок для API конвертации
     mock_response = Mock()
