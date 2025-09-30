@@ -13,8 +13,7 @@ def get_data_is_csv_xlsx(path_file: str) -> list[dict]:
         if file[-1] == 'xlsx':
             df = pd.read_excel(path_file, engine='openpyxl')
             return df.to_dict('records')
-
-    except ImportError as e:
+    except Exception as e:
         print(f'Ошибка: {e}')
 
 
