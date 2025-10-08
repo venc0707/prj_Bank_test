@@ -40,7 +40,7 @@ def financial_transaction(filename: str) -> list[dict]:
 
     except FileNotFoundError:
         print(f"Файл не найден")
-        logger.error('Файл не найден')
+        logger.error(f'Файл не найден')
         return []
 
 
