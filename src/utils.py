@@ -14,12 +14,13 @@ logger.addHandler(file_handler)
 def financial_transaction(filename: str) -> list[dict]:
     """возвращает список словарей с данными о финансовых транзакциях"""
 
-    dir = dirname(dirname(__file__))
-    path_filename = join(dir, f"data/{filename}")
+    # dir = dirname(dirname(__file__))
+    # path_filename = join(dir, f"data/{filename}")
+    # path_filename = '../data/operations.json'
 
     try:
         logger.info('Открывваем файл для чтения')
-        with open(path_filename, "r", encoding="utf-8") as file:
+        with open(filename, "r", encoding="utf-8") as file:
             try:
                 logger.info('Преобразовываем в python обьект')
                 data = json.load(file)
@@ -44,4 +45,4 @@ def financial_transaction(filename: str) -> list[dict]:
 
 
 if __name__ == "__main__":
-    print(financial_transaction("operations.json"))
+    print(financial_transaction("../data/operations.json"))

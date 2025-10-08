@@ -1,11 +1,10 @@
 from collections import Counter
 
 
-def process_bank_operations(data: list[dict], categories: list) -> dict:
+def process_bank_operations(data: list[dict], categories: list = None ) -> dict: # , categories: list
     """ возвращает кол-во операций в каждой категории """
     try:
         data_list = [transaction['description'] for transaction in data]
-        print(data_list)
         count_operations = Counter(data_list)
         return count_operations
 
@@ -64,3 +63,8 @@ if __name__ == '__main__':
     categories = ['Перевод организации', 'Открытие вклада']
 
     print(process_bank_operations(data, categories))
+
+    data_1 = [f'{x}:{i}' for x, i in list(process_bank_operations(data, categories).items())]
+    print(data_1)
+
+
