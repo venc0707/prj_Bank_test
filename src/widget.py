@@ -11,7 +11,6 @@ def mask_account_card(type_number: str) -> str:
     split_type_number = type_number.split()
     type_card = []
     ac_number = ""
-    mask_card = ""
     for item in split_type_number:
         if re.fullmatch(r"^[a-zA-Z]+$", item):
             type_card.append(item)

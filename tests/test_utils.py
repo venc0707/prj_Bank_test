@@ -1,4 +1,5 @@
 import json
+import os
 
 from src.utils import financial_transaction
 
@@ -19,5 +20,11 @@ def test_finansical_transaction_FileNotFoundError():
 def test_finansical_transaction_JSONDecodeError():
     with open("data/test.json2", "w", encoding="utf-8") as f:
         json.dump(('{"key": "value"'), f)
-    result = financial_transaction("test.json2")
+
+    # Добавьте отладочную печать
+    print("Текущий рабочий каталог:", os.getcwd())
+    print("Файл существует:", os.path.exists("data/test.json"))
+    print("Полный путь к файлу:", os.path.abspath("data/test.json"))
+
+    result = financial_transaction("data/test.json2")
     assert result == []
